@@ -5,14 +5,20 @@ The repository contains a Jupyter notebook that will allow you to find an ice cr
 
 # Installation
 1. [Optional] Create a virtual environment
-`conda create --name geo`
-`activate geo`
+```
+conda create --name geo
+activate geo
+```
 
 2. Install required packages
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
 3. Run Jupyter Notebook engine
-`jupyter notebook`
+```
+jupyter notebook
+```
 
 4. Jupyter Notebook will start in your browser. Open Routing.ipynb and voila! 
 
