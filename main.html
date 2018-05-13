@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 600px;
+        width: 600px;
+      }
+
+    </style>
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+    <title>King Ice Cream</title>
+  </head>
+  <body>
+    <h2>King Ice Cream</h2>
+    <div id="map" class="map"></div>
+    <script type="text/javascript">
+        var start = [13.3963586, 52.5141669];
+        var end = [13.402645, 52.519203];
+        var path = [[52.5143491, 13.3969553], [52.5144598, 13.3973412], [52.5145683, 13.3977015], [52.5147075, 13.3981526], [52.5148244, 13.3982565], [52.5152812, 13.3979998], [52.5153282, 13.3979735], [52.515411, 13.3979269], [52.5154356, 13.398027], [52.5154572, 13.3981267], [52.5154764, 13.3982154], [52.5155891, 13.3987352], [52.5157998, 13.3995934], [52.515815, 13.3996587], [52.5158835, 13.39993], [52.515901, 13.3999959], [52.5161622, 13.4006294], [52.5161877, 13.4007192], [52.5161916, 13.400797], [52.5161715, 13.4009083], [52.5159727, 13.4011562], [52.5159587, 13.4012545], [52.5159711, 13.4013603], [52.5163583, 13.402266], [52.5164427, 13.4024634], [52.5167195, 13.4031448], [52.5169649, 13.4037369], [52.5169879, 13.4037966], [52.5171978, 13.4043066], [52.5172145, 13.4043458], [52.5172524, 13.4044333], [52.5174453, 13.4043692], [52.5175835, 13.4043357], [52.5179444, 13.4042224], [52.5180278, 13.4041776], [52.5180906, 13.4041367], [52.5181973, 13.4040257], [52.5183099, 13.4039049], [52.5183967, 13.4037753], [52.5183109, 13.4036129], [52.518133, 13.4033205], [52.5185022, 13.4029662], [52.518568, 13.4029075], [52.5185948, 13.4028833], [52.518584, 13.402854], [52.5185699, 13.4028106], [52.5185908, 13.4027871], [52.5186998, 13.4026722], [52.5187138, 13.4026679], [52.5187275, 13.4026656], [52.5187718, 13.402661], [52.5188317, 13.4026431], [52.5189124, 13.4025547], [52.5189558, 13.4024912], [52.5189746, 13.4024366], [52.5189796, 13.4024086], [52.5189874, 13.4023865], [52.5190653, 13.402326], [52.5190935, 13.4023026], [52.5191068, 13.4023477], [52.5191309, 13.4024113], [52.5191447, 13.4024379], [52.5191181, 13.4024663], [52.5190652, 13.4025249]];
+    
+      /* King marker */
+      var king = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat(start))
+      });
+      king.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+          color: '#8959A8',
+          crossOrigin: 'anonymous',
+          src: 'https://openlayers.org/en/v4.6.5/examples/data/dot.png'
+        }))
+      }));
+      
+      var kingSource = new ol.source.Vector({
+        features: [king]
+      });
+
+      var kingLayer = new ol.layer.Vector({
+        source: kingSource
+      });
+      
+      /* Bandy Brooks - the closest ice cream place */
+      var bandybrooks = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat(end))
+      });
+      bandybrooks.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+          color: [113, 140, 0],
+          crossOrigin: 'anonymous',
+          src: 'https://openlayers.org/en/v4.6.5/examples/data/dot.png'
+        }))
+      }));
+      var bandybrooksLayer = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            features: [bandybrooks]
+        })
+      });
+      
+      /* Path */
+    var markers = [];
+    
+    //create a bunch of icons and add to source vector
+    for (var i=0;i<path.length;i++){
+        var lat = path[i][0];
+        var lon = path[i][1];
+        markers[i]= ol.proj.fromLonLat([lon, lat]);
+    }
+    
+    var styles = [
+          // linestring
+          new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              color: '#d40000',
+              width: 5
+            })
+          })
+        ];
+
+    var layerLines = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            features: [new ol.Feature({
+                geometry: new ol.geom.LineString(markers, 'XY'),
+                name: 'Line'
+            })]
+        }),
+        style: styles
+    });
+      
+  
+      /* Final Map */
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          }),
+          kingLayer,
+          bandybrooksLayer,
+          layerLines
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat(start),
+          zoom: 15
+        })
+      });
+    
+    </script>
+  </body>
+</html>
