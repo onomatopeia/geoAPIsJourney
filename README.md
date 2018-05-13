@@ -4,9 +4,10 @@ A journey over APIs for geographical data
 The repository contains a Jupyter notebook that will allow you to find an ice cream shop that is the closest to your location and to determine the shortest route to get there. 
 
 # Installation
-1. [Optional] Create a virtual environment
+1. [Optional] Create a virtual environment with Python 3
+If you have Anaconda:
 ```
-conda create --name geo
+conda create -n geo python=3.6 
 activate geo
 ```
 
