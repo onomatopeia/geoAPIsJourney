@@ -10,26 +10,18 @@ If you have Anaconda:
 conda create -n geo
 activate geo
 ```
+Otherwise follow the docs https://docs.python.org/3/tutorial/venv.html
 
 2. Install required packages
 ```
 pip install -r requirements.txt
 ```
 
-3. If you are on Linux / Mac, aditionally install Shapely
-```
-pip install shapely
-```
-If you are on Windows, download Shapely whl file adequate for your Python version (cp27 for Python 2.7, cp34 for Python 3.4, and so on) and your system architecture (32 or amd64). Then install it using pip
-```
-pip install <path to Shapely.whl>
-```
-
-4. Run Jupyter Notebook engine
+3. Run Jupyter Notebook engine
 ```
 jupyter notebook
 ```
 
-5. Jupyter Notebook will start in your browser. Open Routing.ipynb and voila! 
+4. Jupyter Notebook will start in your browser. Open Routing.ipynb and voila! 
 
 Have fun finding the nearest ice cream shop and enjoy your ice cream!
